@@ -1,4 +1,5 @@
 function [r_ijk, v_ijk] = oe2xyz(oe, mu, t)
+
 % Converts orbital elements (units: degrees) to ECI state
 %
 % Input:
@@ -7,14 +8,16 @@ function [r_ijk, v_ijk] = oe2xyz(oe, mu, t)
 %   * time since given mean anomaly [days]
 % Output:
 %   * ECI state [km, km/s]
-d2r = pi/180;
+
+global deg2rad
+
 n = sqrt(mu/oe(1)^3);
 a = oe(1);
 e = oe(2);
-i = oe(3)*d2r;
-O = oe(4)*d2r;
-w = oe(5)*d2r;
-M = oe(6)*d2r + n*86400*t;
+i = oe(3)*deg2rad;
+O = oe(4)*deg2rad;
+w = oe(5)*deg2rad;
+M = oe(6)*deg2rad + n*86400*t;
 
 E = mean2ecc(M, e);
 v = 2*atan(sqrt((1 + e)/(1 - e))*tan(E/2));

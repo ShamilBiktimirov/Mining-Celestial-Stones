@@ -2,12 +2,10 @@ function dV = dV_shoemaker_Earth(e,inc,a)
 
 %e - eccentricity of the asteroid
 %a - semimajor axis of asteroid
-%Q - aphelion distance of asteroid normalized to semimajor axis of the
-%Earth
+%Q - aphelion distance of asteroid normalized to A
 %inc - inclination of the ASTEROID orbit
 %S - Earth escape velocity from LEO (normalized)
 %U0 - normalized orbital speed at at LEO
-%h - Initial orbit is LEO with 1000km altitude
 
 h = 500;
 n = 24; % speed of the earth km/s
