@@ -33,8 +33,8 @@ function dV_map = calculate_dV_map(oe1, oe2, input)
             dv1 = norm(v1_tr - v1);
             dv2 = norm(v2_tr - v2);
             
-            InjectionDV = sqrt(dv1^2 +2*oe1(8)/(oe1(9)+oe1(10))) - sqrt(oe1(8)/(oe1(9)+oe1(10)));
-            InsertionDV = sqrt(dv2^2 +2*oe2(8)/(oe2(9)+oe2(10))) - sqrt(oe2(8)/(oe2(9)+oe2(10)));
+            InjectionDV = sqrt(dv1^2 + 2*oe1(8)/(oe1(9)+oe1(10))) - sqrt(oe1(8)/(oe1(9)+oe1(10)));
+            InsertionDV = sqrt(dv2^2 + 2*oe2(8)/(oe2(9)+oe2(10))) - sqrt(oe2(8)/(oe2(9)+oe2(10)));
              
             dV = InjectionDV + InsertionDV;
             

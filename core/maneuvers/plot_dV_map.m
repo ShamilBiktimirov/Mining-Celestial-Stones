@@ -2,7 +2,8 @@ function plot_dV_map(dV_matrix, input, dV_threshold)
 
 % The function plot a dV map for transfer
 
-LD = input.Modeling_Start:input.LD_dt:input.Modeling_Start + input.Modeling_time;
+LD = 1:input.LD_dt:input.Modeling_time;
+LD = LD(:) + input.Modeling_Start;
 TOF = input.min_TOF:input.TOF_dt:input.max_TOF;
 
 if ~isnan(dV_threshold)
