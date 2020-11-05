@@ -139,7 +139,7 @@ function [V1,...
  This routine implements a new algorithm that solves Lambert's problem. The
  algorithm has two major characteristics that makes it favorable to other
  existing ones.
-
+    
  1) It describes the generic orbit solution of the boundary condition
  problem through the variable X=log(1+cos(alpha/2)). By doing so the
  graph of the time of flight become defined in the entire real axis and

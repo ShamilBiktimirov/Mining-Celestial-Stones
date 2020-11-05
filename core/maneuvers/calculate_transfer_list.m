@@ -1,8 +1,9 @@
 function transfers = calculate_transfer_list(dV_map, input)
-
+global delta_mjd
     raw_transfer_list = mins(dV_map, input.dV_max);
 
-    LD_vec = 1:input.LD_dt:input.Modeling_time;
+    LD_vec = (1:input.LD_dt:input.Modeling_time) + input.Modeling_Start;
+    LD_vec = LD_vec(:) - delta_mjd;
     TOF_vec = input.min_TOF:input.TOF_dt:input.max_TOF;
 
     len = size(raw_transfer_list, 1);

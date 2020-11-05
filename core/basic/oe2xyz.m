@@ -1,4 +1,4 @@
-function [r_ijk, v_ijk] = oe2xyz(oe, mu, t)
+function [r_ijk, v_ijk] = oe2xyz(oe, mu, dt)
 
 % Converts orbital elements (units: degrees) to ECI state
 %
@@ -17,7 +17,7 @@ e = oe(2);
 i = oe(3)*deg2rad;
 O = oe(4)*deg2rad;
 w = oe(5)*deg2rad;
-M = oe(6)*deg2rad + n*86400*t;
+M = oe(6)*deg2rad + n*86400*dt;
 
 E = mean2ecc(M, e);
 v = 2*atan(sqrt((1 + e)/(1 - e))*tan(E/2));

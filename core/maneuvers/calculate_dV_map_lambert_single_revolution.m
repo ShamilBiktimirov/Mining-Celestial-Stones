@@ -1,4 +1,4 @@
-function dV_map = calculate_dV_map(oe1, oe2, input)
+function dV_map = calculate_dV_map_lambert_single_revolution(oe1, oe2, input)
 
     global muSun
     
@@ -17,28 +17,26 @@ function dV_map = calculate_dV_map(oe1, oe2, input)
             tt = TOF_vec(j);
             [r2, v2] = oe2xyz(oe2, muSun, tw + tt);
             % transfer calculation
+            
             m = 0;
             [v1_tr, v2_tr, ~] = lambert(r1, r2, tt, m, muSun);
                 
             
             in_orbit_norm = cross(r1,v1);
             transfer_normal = cross(r1,v1_tr);
-            angle_between_normal = 2 * atan(norm(in_orbit_norm*norm(transfer_normal) - norm(in_orbit_norm)*transfer_normal) / norm(in_orbit_norm * norm(transfer_normal) + norm(in_orbit_norm) * transfer_normal));
+            angle_between_normal = abs(dot(in_orbit_norm, transfer_normal)/vecnorm(in_orbit_norm)/vecnorm(transfer_normal));
  
             if angle_between_normal > pi/2
                  [v1_tr, v2_tr, ~] = lambert(r1, r2, -tt, m,  muSun);
             end
          
-            % Patched conic approximation
-            dv1 = norm(v1_tr - v1);
-            dv2 = norm(v2_tr - v2);
+            dv_departure = vecnorm(v1_tr - v1);
+            dv_arrival = vecnorm(v2_tr - v2);
+                         
+            dV_total = dv_departure + dv_arrival;
+%              dV_total = dv_arrival;
             
-            InjectionDV = sqrt(dv1^2 + 2*oe1(8)/(oe1(9)+oe1(10))) - sqrt(oe1(8)/(oe1(9)+oe1(10)));
-            InsertionDV = sqrt(dv2^2 + 2*oe2(8)/(oe2(9)+oe2(10))) - sqrt(oe2(8)/(oe2(9)+oe2(10)));
-             
-            dV = InjectionDV + InsertionDV;
-            
-            dV_map(i,j) = dV;
+            dV_map(i,j) = dV_total;
         end
     end    
 end
